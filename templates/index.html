@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Início - Controle de Balões</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <h1>Configurar Maratona</h1>
+
+    <form method="POST">
+        <label>Quantas equipes participarão?</label>
+        <input type="number" name="num_equipes" min="1" required>
+        <button type="submit">Criar Sala</button>
+    </form>
+</body>
+</html>

@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Painel - Emissor</title>
+
+    <!-- Bootstrap CSS via CDN -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- CSS customizado -->
+    <link href="{{ url_for('static', filename='css/emiter.css') }}" rel="stylesheet">
+
+    <!-- Socket.IO -->
+    <script src="https://cdn.socket.io/4.3.2/socket.io.min.js"></script>
+</head>
+<body>
+
+    <div class="container">
+        <h1>Painel de Controle</h1>
+
+        <!-- Formulário de adicionar balão -->
+        <form action="/adicionar" method="POST">
+            <div class="mb-3">
+                <label class="form-label">Equipe:</label>
+                <select name="equipe" class="form-select" required>
+                    {% for i in range(1, num_equipes + 1) %}
+                        <option value="{{ i }}">Equipe {{ i }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">Letra do problema:</label>
+                <select name="letra" class="form-select" required>
+                    {% for letra in ['A','B','C','D','E','F'] %}
+                        <option value="{{ letra }}">{{ letra }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+
+            <button type="submit" class="btn btn-primary">Adicionar Balão</button>
+        </form>
+
+        <!-- Lista de balões -->
+        <h2 class="mt-5">Lista de Balões</h2>
+        <ul id="lista-baloes" class="list-group">
+            {% for balao in baloes %}
+                <li class="list-group-item d-flex justify-content-between align-items-center">
+                    Equipe {{ balao['equipe'] }} - Problema {{ balao['letra'] }} ({{ balao['cor'] }})
+                    {% if balao['entregue'] %}
+                        <span class="entregue">Entregue</span>
+                    {% else %}
+                        <span class="aguardando">Aguardando entrega</span>
+                    {% endif %}
+                </li>
+            {% endfor %}
+        </ul>
+    </div>
+
+    <script>
+        const socket = io();
+        socket.on('atualizar', () => location.reload());
+    </script>
+</body>
+</html>

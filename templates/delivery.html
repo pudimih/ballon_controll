@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Entregador - Controle de Balões</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/output.css') }}">
+    <script src="https://cdn.socket.io/4.3.2/socket.io.min.js"></script>
+</head>
+<body>
+    <h1>Lista de Balões</h1>
+
+    <ul id="lista-baloes">
+        {% for balao in baloes %}
+            <li>
+                Equipe {{ balao['equipe'] }} - Problema {{ balao['letra'] }} ({{ balao['cor'] }})
+                {% if not balao['entregue'] %}
+                    <button onclick="entregar('{{ loop.index0 }}')">Entregar</button>
+                {% else %}
+                    ✅ Entregue
+                {% endif %}
+            </li>
+        {% endfor %}
+    </ul>
+
+    <script>
+        const socket = io();
+
+        socket.on('atualizar', (baloes) => {
+            location.reload();
+        });
+
+        function entregar(index) {
+            fetch(`/entregar/${index}`, { method: 'POST' });
+        }
+    </script>
+</body>
+</html>

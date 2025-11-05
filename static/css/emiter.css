@@ -1,0 +1,61 @@
+/* Corpo da página */
+body {
+    background-color: #f8f9fa; /* cinza claro */
+    padding: 2rem;
+    font-family: Arial, sans-serif;
+}
+
+/* Título principal */
+h1 {
+    color: #343a40; /* cinza escuro */
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+/* Formulário */
+form {
+    background-color: #ffffff;
+    padding: 2rem;
+    border-radius: 0.5rem;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    max-width: 500px;
+    margin: 0 auto 2rem auto;
+}
+
+/* Botão customizado (Bootstrap já tem .btn) */
+button {
+    width: 100%;
+    font-weight: bold;
+}
+
+/* Lista de balões */
+#lista-baloes {
+    max-width: 500px;
+    margin: 0 auto;
+    padding: 1rem;
+    background-color: #ffffff;
+    border-radius: 0.5rem;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+}
+
+#lista-baloes li {
+    padding: 0.75rem;
+    border-bottom: 1px solid #dee2e6;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+#lista-baloes li:last-child {
+    border-bottom: none;
+}
+
+.entregue {
+    color: green;
+    font-weight: bold;
+}
+
+.aguardando {
+    color: red;
+    font-weight: bold;
+}
